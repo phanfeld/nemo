@@ -46,7 +46,7 @@ def _hier_get_name_from_child(module, child, name):
             return name_plus_n
         elif len(list(m.named_children())) > 0:
             name_child = _hier_get_name_from_child(m, child, name_plus_n)
-            if name_child is not '':
+            if name_child != '':
                 return name_child
     return ''
 
@@ -140,7 +140,7 @@ class DeployGraph(object):
                 try:
                     graph, _params_dict, _torch_out = torch.onnx.utils._model_to_graph(module, dummy_input, propagate=True, _retain_param_name=True)
                 except TypeError:
-                    graph, _params_dict, _torch_out = torch.onnx.utils._model_to_graph(module, dummy_input, _retain_param_name=True)
+                    graph, _params_dict, _torch_out = torch.onnx.utils._model_to_graph(module, dummy_input)
         input_dict = {}
         output_dict = {}
         self.non_unique_names_dict = {}
